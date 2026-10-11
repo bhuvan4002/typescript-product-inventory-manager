@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A TypeScript Product Inventory Manager" />
+  <title>Product Inventory Manager</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">INVENTORY CONTROL</p>
+        <h1>Product Inventory Manager</h1>
+        <p class="subtitle">Keep your products, prices, and stock organized.</p>
+      </div>
+      <div class="hero-stat">
+        <span id="total-count">0</span>
+        <small>Total products</small>
+      </div>
+    </header>
+
+    <main>
+      <section class="stats-grid" aria-label="Inventory summary">
+        <article class="stat-card"><span>Products</span><strong id="stat-products">0</strong></article>
+        <article class="stat-card"><span>In stock</span><strong id="stat-stock">0</strong></article>
+        <article class="stat-card"><span>Out of stock</span><strong id="stat-out">0</strong></article>
+        <article class="stat-card"><span>Inventory value</span><strong id="stat-value">₹0.00</strong></article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel form-panel">
+          <div class="section-heading">
+            <div><p class="eyebrow">ADD ITEM</p><h2>Add a product</h2></div>
+          </div>
+          <form id="product-form">
+            <label for="product-name">Product name</label>
+            <input id="product-name" name="name" type="text" placeholder="e.g. Wireless Mouse" required maxlength="80" />
+
+            <div class="two-columns">
+              <div>
+                <label for="product-price">Price (₹)</label>
+                <input id="product-price" name="price" type="number" min="0.01" step="0.01" placeholder="599" required />
+              </div>
+              <div>
+                <label for="product-quantity">Quantity</label>
+                <input id="product-quantity" name="quantity" type="number" min="0" step="1" value="1" required />
+              </div>
+            </div>
+
+            <label for="product-tags">Tags <span class="muted">(comma separated)</span></label>
+            <input id="product-tags" name="tags" type="text" placeholder="electronics, accessory" />
+
+            <label for="product-discount">Discount</label>
+            <select id="product-discount" name="discount">
+              <option value="0">No discount</option>
+              <option value="5">5% off</option>
+              <option value="10" selected>10% off</option>
+              <option value="15">15% off</option>
+              <option value="20">20% off</option>
+            </select>
+
+            <button class="primary-button" type="submit">+ Add product</button>
+            <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="panel inventory-panel">
+          <div class="inventory-heading">
+            <div><p class="eyebrow">YOUR CATALOG</p><h2>Inventory</h2></div>
+            <label class="search-wrap" for="search-input">
+              <span class="sr-only">Search products</span>
+              <input id="search-input" type="search" placeholder="Search products..." />
+            </label>
+          </div>
+          <div class="filter-row">
+            <button class="filter-button active" data-filter="all" type="button">All products</button>
+            <button class="filter-button" data-filter="available" type="button">In stock</button>
+            <button class="filter-button" data-filter="out" type="button">Out of stock</button>
+          </div>
+          <div id="product-list" class="product-list"></div>
+          <p id="empty-message" class="empty-message" hidden>No products match your search. Add a product or change the filter.</p>
+        </section>
+      </div>
+      <footer>Built with TypeScript · Product Inventory Manager</footer>
+    </main>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
